@@ -280,7 +280,7 @@ defined('C5_EXECUTE') or die("Access Denied.");
 		/* area stuff */
 		
 		function getArea($arHandle) {
-			return Area::get($c, $arHandle);
+			return Area::get($this, $arHandle);
 		}
 
 		/* aliased content */
@@ -833,6 +833,9 @@ defined('C5_EXECUTE') or die("Access Denied.");
 			$cvIsNew = 1;
 			if ($cvIsApproved) {
 				$cvIsNew = 0;
+			}
+			if (isset($data['cvIsNew'])) {
+				$cvIsNew = $data['cvIsNew'];
 			}
 			$data['name'] = Loader::helper('text')->sanitize($data['name']);
 			if (is_object($this)) {

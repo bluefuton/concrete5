@@ -66,7 +66,9 @@ class Concrete5_Library_ItemList {
 	}
 	
 	public function setItemsPerPage($num) {
-		$this->itemsPerPage = $num;
+		if (Loader::helper('validation/numbers')->integer($num)) {
+			$this->itemsPerPage = $num;
+		}
 	}
 	
 	public function getItemsPerPage() {
@@ -207,10 +209,10 @@ class Concrete5_Library_ItemList {
 			$prevClass = 'prev';
 			$nextClass = 'next';
 			if (!$paginator->hasPreviousPage()) {
-				$prevClass = 'disabled';
+				$prevClass = 'prev disabled';
 			}
 			if (!$paginator->hasNextPage()) {
-				$nextClass = 'disabled';
+				$nextClass = 'next disabled';
 			}
 			$html .= '<li class="' . $prevClass . '">' . $paginator->getPrevious(false, 'a') . '</li>';
 			$html .= $paginator->getPages('li');
